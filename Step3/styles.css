@@ -1,0 +1,36 @@
+h1, ul, #display {
+  text-align: center;
+  align-content: center;
+}
+
+li {
+  display:inline;
+  border: solid 3px grey;
+  border-radius: 15px;
+  padding: 5px;
+  margin: 5px;
+  list-style-type: none;
+  line-height: 4em;
+}
+
+img {
+  width: 300px;
+  height: auto;
+  border-radius: 15px;
+  border: solid 5px rgb(145, 4, 4);
+}
+
+.dog {
+  color: rgb(145, 4, 4);
+  font-weight: bolder;
+}
+
+.dog:hover {
+  cursor: pointer;
+  background-color: grey;
+  color: blue;
+}
+
+img:hover {
+  cursor: pointer;
+}
