@@ -2,7 +2,7 @@ $(function () {
   let model = {
     init: function () {
       currentDog: null,
-        dogs = [
+        allDogs = [
           {
             name: "Pixie",
             image: "../img/Pixie.jpg",
@@ -41,7 +41,7 @@ $(function () {
         ];
     },
     getAllDogs: function () {
-      return dogs;
+      return allDogs;
     },
     getCurrentDog: function () {
       return currentDog;
@@ -50,7 +50,7 @@ $(function () {
       currentDog = index;
     },
     incrementDogClicks: function (index) {
-      dogs[index].clicks++;
+      allDogs[index].clicks++;
     },
     editCurrentDog: function () {
       allDogs[currentDog].name = name;
@@ -73,6 +73,7 @@ $(function () {
     },
     changeDog: function (index) {
       model.changeCurrentDog(index);
+      viewDogList.render();
       viewDogDisplay.render();
     },
     incrementClicks: function (index) {
@@ -121,7 +122,7 @@ $(function () {
   let viewAdmin = {
     init: function () {
       $("#button").click(function () {
-        viewAdmin.render();
+        viewAdmin.init();
       });
     },
     render: function () {
@@ -129,9 +130,9 @@ $(function () {
       dog = dogs[octopus.getDog()];
       if (dog != null) {
         $("#admin").empty();
-        editor = "";
-        editor += "<form>Namr: <input type='text' name='name'><br>Image: <input type='text' name='image'><br>Clicks:<input type='text' name='clicks'><div id='save'>Save</div><div id='cancel'>Cancel</div></form>"
-        $("#admin").append(editor);
+        editArea = "";
+        editArea += "<form>Name: <input type='text' name='name'><br>Image: <input type='text' name='image'><br>Clicks: <input type='text' name='clicks'><div id='save'>Save</div><div id='cancel'>Cancel</div></form>";
+        $("#admin").append(editArea);
         $("input[name=name]").val(dog.name);
         $("input[name=image]").val(dog.image);
         $("input[name=clicks]").val(dog.clicks);
@@ -145,6 +146,8 @@ $(function () {
         $("#cancel").click(function () {
           $("#admin").empty();
         });
+      } else {
+        console.log("Error");
       }
     }
   }
