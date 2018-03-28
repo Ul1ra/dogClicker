@@ -63,7 +63,7 @@ $(document).ready(function () {
     init: function () {
       model.init();
       viewDogList.render();
-      viewAdmin.init();
+
     },
     getDogs: function () {
       return model.getAllDogs();
@@ -109,12 +109,13 @@ $(document).ready(function () {
       $("#display").empty();
       dogs = octopus.getDogs();
       dog = dogs[octopus.getDog()];
-      let toDisplay = "<div class='name'>" + dog.name + "</div><img src='" + dog.image + "' class='moves'/><div id='" + octopus.getDog().toString() + "' class='count'>" + dog.clicks.toString() + "</div>";
+      let toDisplay = "<div class='name'>" + dog.name + "</div><img src='" + dog.image + "' class='moves'/><div id='" + octopus.getDog().toString() + "'>" + dog.clicks.toString() + "</div>";
       $("#display").append(toDisplay);
       $(".moves").click(function (object) {
         let elem = object.target.parentElement.childNodes[2];
         octopus.incrementClicks(elem.id);
         $("#" + elem.id).text(dogs[elem.id].clicks);
+        viewAdmin.init();
       });
     }
   };
@@ -149,6 +150,5 @@ $(document).ready(function () {
       }
     }
   }
-
   octopus.init();
 });
