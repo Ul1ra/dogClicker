@@ -1,4 +1,4 @@
-h1, ul, #display {
+h1, ul, #display, button, #admin {
   text-align: center;
   align-content: center;
 }
@@ -33,4 +33,8 @@ img {
 
 img:hover {
   cursor: pointer;
+}
+
+section {
+  text-align: center;
 }
