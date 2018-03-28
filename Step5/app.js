@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
   let model = {
     init: function () {
       currentDog: null;
@@ -141,7 +141,7 @@ $(function () {
           image = $("input[name=image]").val();
           clicks = $("input[name=clicks]").val();
           octopus.editDog(name, image, clicks);
-          $("#admin".empty);
+          $("#admin").empty();
         });
         $("#cancel").click(function () {
           $("#admin").empty();
