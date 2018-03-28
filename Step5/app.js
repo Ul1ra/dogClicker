@@ -1,44 +1,44 @@
 $(function () {
   let model = {
     init: function () {
-      currentDog: null,
-        allDogs = [
-          {
-            name: "Pixie",
-            image: "../img/Pixie.jpg",
-            clicks: 0
-          },
-          {
-            name: "Evo",
-            image: "../img/Evo.jpg",
-            clicks: 0
-          },
-          {
-            name: "Joy",
-            image: "../img/Joy.jpg",
-            clicks: 0
-          },
-          {
-            name: "Lucy",
-            image: "../img/Lucy.jpg",
-            clicks: 0
-          },
-          {
-            name: "Cookie",
-            image: "../img/Cookie.jpg",
-            clicks: 0
-          },
-          {
-            name: "Vicky",
-            image: "../img/Vicky.jpg",
-            clicks: 0
-          },
-          {
-            name: "Vivaldi",
-            image: "../img/Vivaldi.jpg",
-            clicks: 0
-          }
-        ];
+      currentDog: null;
+      allDogs = [
+        {
+          name: "Pixie",
+          image: "../img/Pixie.jpg",
+          clicks: 0
+        },
+        {
+          name: "Evo",
+          image: "../img/Evo.jpg",
+          clicks: 0
+        },
+        {
+          name: "Joy",
+          image: "../img/Joy.jpg",
+          clicks: 0
+        },
+        {
+          name: "Lucy",
+          image: "../img/Lucy.jpg",
+          clicks: 0
+        },
+        {
+          name: "Cookie",
+          image: "../img/Cookie.jpg",
+          clicks: 0
+        },
+        {
+          name: "Vicky",
+          image: "../img/Vicky.jpg",
+          clicks: 0
+        },
+        {
+          name: "Vivaldi",
+          image: "../img/Vivaldi.jpg",
+          clicks: 0
+        }
+      ];
     },
     getAllDogs: function () {
       return allDogs;
@@ -52,7 +52,7 @@ $(function () {
     incrementDogClicks: function (index) {
       allDogs[index].clicks++;
     },
-    editCurrentDog: function () {
+    editCurrentDog: function (name, image, clicks) {
       allDogs[currentDog].name = name;
       allDogs[currentDog].image = image;
       allDogs[currentDog].clicks = clicks;
@@ -62,7 +62,7 @@ $(function () {
   let octopus = {
     init: function () {
       model.init();
-      viewDogList.init();
+      viewDogList.render();
       viewAdmin.init();
     },
     getDogs: function () {
@@ -73,7 +73,6 @@ $(function () {
     },
     changeDog: function (index) {
       model.changeCurrentDog(index);
-      viewDogList.render();
       viewDogDisplay.render();
     },
     incrementClicks: function (index) {
@@ -81,14 +80,15 @@ $(function () {
       viewDogDisplay.render();
     },
     editDog: function (name, image, clicks) {
-      model.incrementDogClicks(name, image, clicks);
+      model.editCurrentDog(name, image, clicks);
       viewDogList.render();
       viewDogDisplay.render();
     }
   };
 
   let viewDogList = {
-    init: function () {
+    render: function () {
+      $("#list").empty();
       dogs = octopus.getDogs();
       let willBeAdded = "";
       $.each(dogs, function (dogIndex, dog) {
@@ -122,16 +122,16 @@ $(function () {
   let viewAdmin = {
     init: function () {
       $("#button").click(function () {
-        viewAdmin.init();
+        viewAdmin.render();
       });
     },
     render: function () {
-      dogs.octopus.getDogs();
+      dogs = octopus.getDogs();
       dog = dogs[octopus.getDog()];
-      if (dog != null) {
+      if (currentDog != null) {
         $("#admin").empty();
         editArea = "";
-        editArea += "<form>Name: <input type='text' name='name'><br>Image: <input type='text' name='image'><br>Clicks: <input type='text' name='clicks'><div id='save'>Save</div><div id='cancel'>Cancel</div></form>";
+        editArea += "<form>Name: <input type='text' name='name'><br>Image: <input type='text' name='image'><br>Clicks: <input type='text' name='clicks'><br><button id='save'>Save</button><br><button id='cancel'>Cancel</button></form>";
         $("#admin").append(editArea);
         $("input[name=name]").val(dog.name);
         $("input[name=image]").val(dog.image);
@@ -146,8 +146,6 @@ $(function () {
         $("#cancel").click(function () {
           $("#admin").empty();
         });
-      } else {
-        console.log("Error");
       }
     }
   }
